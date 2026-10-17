@@ -1,0 +1,168 @@
+/* --- IMPOSTAZIONI GENERALI --- */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #19191e;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin: 0;
+}
+
+h1 { 
+  color: #ff4757; 
+  text-shadow: 2px 2px #000;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #ffa502;
+}
+
+/* --- CAMPO DI BATTAGLIA E SCHEDE --- */
+.battlefield {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 850px;
+  margin-bottom: 25px;
+  gap: 25px;
+}
+
+.card {
+  background: #23232e;
+  border: 2px solid #444;
+  border-radius: 12px;
+  padding: 25px;
+  width: 45%;
+  text-align: center;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.6);
+  position: relative;
+}
+
+/* Bordi personalizzati per distinguere i personaggi */
+.card.hero { border-color: #2ed573; }
+.card.villain { border-color: #ff4757; }
+
+/* --- RITRATTI ED ELEMENTI GRAFICI --- */
+.card-avatar {
+  font-size: 64px;
+  margin-bottom: 15px;
+  filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.4));
+  user-select: none;
+}
+
+/* --- BARRE DELLA SALUTE (HP) --- */
+.hp-bar-container {
+  background: #444;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 15px 0;
+  height: 24px;
+  border: 1px solid #000;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.hp-bar {
+  height: 100%;
+  width: 100%;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Sfumature per le barre della salute */
+.hero .hp-bar { background: linear-gradient(90deg, #2ed573, #7bed9f); }
+.villain .hp-bar { background: linear-gradient(90deg, #ff4757, #ff6b81); }
+
+/* --- CONTENITORE PULSANTI --- */
+.actions-container {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+/* --- PULSANTI DI AZIONE --- */
+.btn-action {
+  color: white;
+  border: none;
+  padding: 14px 35px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+/* Bottone Attacca (Rosso) con effetto 3D */
+#btn-attack {
+  background: #ff4757;
+  box-shadow: 0 4px #a70016;
+}
+
+/* Bottone Rivincita (Arancione) con effetto 3D */
+#btn-restart {
+  background: #ffa502;
+  box-shadow: 0 4px #b37400;
+}
+
+/* Effetto pressione del tasto */
+.btn-action:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 0 0 transparent !important;
+}
+
+/* Stato disabilitato dei pulsanti */
+.btn-action:disabled {
+  background: #444 !important;
+  box-shadow: none !important;
+  color: #888;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* --- REGISTRO DEI TURNI (LOG) --- */
+.log-container {
+  width: 100%;
+  max-width: 850px;
+  background: #0f0f12;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 15px;
+  height: 220px;
+  overflow-y: auto;
+  font-family: 'Courier New', Courier, monospace;
+  color: #00ff00;
+  box-sizing: border-box;
+  box-shadow: inset 0 4px 8px rgba(0,0,0,0.8);
+}
+
+.log-entry { 
+  margin-bottom: 10px; 
+  border-left: 4px solid #555; 
+  padding-left: 10px; 
+  line-height: 1.4;
+}
+
+/* Colori differenziati nel registro degli eventi */
+.log-hero { border-color: #2ed573; color: #e8ecef; }
+.log-villain { border-color: #ff4757; color: #ffbecc; }
+.log-system { border-color: #ffa502; color: #ffa502; font-weight: bold; }
+
+/* --- RESPONSIVITÀ PER SCHERMI PICCOLI --- */
+@media (max-width: 600px) {
+  .battlefield {
+    flex-direction: column;
+    align-items: center;
+  }
+  .card {
+    width: 90%;
+  }
+  .actions-container {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+  }
+}

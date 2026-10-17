@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPG Battle Simulator - Deluxe Edition</title>
+  <!-- Evita l'errore 404 della favicon nei log del browser -->
+  <link rel="icon" href="data:,"> 
+  <!-- Collegamento al file CSS che definiremo nel prossimo passaggio -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>⚔️ RPG Battle Simulator: Deluxe Edition ⚔️</h1>
+
+  <!-- Campo di battaglia che contiene le due schede dei combattenti -->
+  <div class="battlefield">
+    
+    <!-- Scheda Eroe -->
+    <div class="card hero">
+      <div id="hero-avatar" class="card-avatar">❓</div>
+      <h2 id="hero-name">Scegli Eroe</h2>
+      <p id="hero-weapon">Arma: -</p>
+      <div class="hp-bar-container">
+        <div id="hero-hp-bar" class="hp-bar"></div>
+      </div>
+      <p>PS: <span id="hero-hp-text">0/0</span></p>
+    </div>
+
+    <!-- Scheda Nemico -->
+    <div class="card villain">
+      <div id="villain-avatar" class="card-avatar">❓</div>
+      <h2 id="villain-name">Scegli Nemico</h2>
+      <p id="villain-armor">Armatura: -</p>
+      <div class="hp-bar-container">
+        <div id="villain-hp-bar" class="hp-bar"></div>
+      </div>
+      <p>PS: <span id="villain-hp-text">0/0</span></p>
+    </div>
+
+  </div>
+
+  <!-- Contenitore dei Pulsanti di Azione -->
+  <div class="actions-container">
+    <button id="btn-attack" class="btn-action" disabled>ATTACCA!</button>
+    <button id="btn-restart" class="btn-action" disabled>RIVINCITA 🔄</button>
+  </div>
+
+  <!-- Registro dei Turni (Log) -->
+  <h3>Registro di Battaglia</h3>
+  <div id="log" class="log-container"></div>
+
+  <!-- Collegamento al file JavaScript che conterrà la logica del gioco -->
+  <script src="main.js"></script>
+</body>
+</html>
