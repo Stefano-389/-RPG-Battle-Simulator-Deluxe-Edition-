@@ -1,4 +1,5 @@
 // 1. DATASET ESTESO DEL GIOCO (DELUXE)
+
 const armiEroe = {
   spada:            { nome: "Spada", dannoMin: 15, dannoMax: 25, tipoDanno: "taglio" },
   mazza:            { nome: "Mazza", dannoMin: 18, dannoMax: 22, tipoDanno: "impatto" },
@@ -6,7 +7,7 @@ const armiEroe = {
   bastone_magico:   { nome: "Bastone Magico", dannoMin: 20, dannoMax: 26, tipoDanno: "impatto" },
   pugnali:          { nome: "Pugnali Gemelli", dannoMin: 10, dannoMax: 30, tipoDanno: "perforazione" },
   lanciatore:       { nome: "Lanciatore Pesante", dannoMin: 16, dannoMax: 24, tipoDanno: "perforazione" },
-  ascia_bipenne:    { nome: "Ascia 2 Mani", dannoMin: 22, dannoMax: 32, tipoDanno: "taglio" }, // <--- AGGIORNATO QUI
+  ascia_bipenne:    { nome: "Ascia 2 Mani", dannoMin: 22, dannoMax: 32, tipoDanno: "taglio" }, // Modificato nome visualizzato
   falce_oscura:     { nome: "Falce Oscura", dannoMin: 14, dannoMax: 28, tipoDanno: "taglio" }
 };
 
@@ -32,6 +33,7 @@ const nemici = {
 };
 
 // 2. STATO DEL GIOCO E RIFERIMENTI DOM
+
 let eroe = null;
 let villain = null;
 let turno = 1;
@@ -39,6 +41,10 @@ let turno = 1;
 const logDiv = document.getElementById('log');
 const btnAttack = document.getElementById('btn-attack');
 const btnRestart = document.getElementById('btn-restart');
+
+// Nuovi riferimenti per la gestione del banner di vittoria
+const victoryScreen = document.getElementById('victory-screen');
+const victoryMessage = document.getElementById('victory-message');
 
 // 3. FUNZIONI HELPER E GRAFICA
 
@@ -71,13 +77,13 @@ function aggiornaGrafica() {
 }
 
 // 4. VALIDAZIONE INPUT E RESET
-
 function inizializzaGioco() {
   eroe = null;
   villain = null;
   turno = 1;
   logDiv.innerHTML = ""; 
   btnRestart.disabled = true;
+  victoryScreen.classList.add('hidden'); // Nasconde il banner all'avvio o riavvio
 
   // Selezione Eroe
   do {
@@ -125,15 +131,13 @@ function inizializzaGioco() {
         villain = { ...nemici[chiave] };
       }
     }
-    if (!villain) { alert("Nemico non valido!"); }
+    if (!villain) { alert("Nemico non valida!"); }
   } while (!villain);
 
   aggiornaGrafica();
   aggiungiLog(`⚔️ La leggendaria battaglia ha inizio! ${eroe.avatar} ${eroe.nome} contro ${villain.avatar} ${villain.nome}.`, 'log-system');
   btnAttack.disabled = false;
 }
-
-
 // 5. EVENTI DI COMBATTIMENTO E RIAVVIO
 
 btnAttack.addEventListener('click', () => {
@@ -159,6 +163,11 @@ btnAttack.addEventListener('click', () => {
     villain.puntiVita = 0;
     aggiornaGrafica();
     aggiungiLog(`🏆 <b>TRIONFO ECLETTICO!</b> ${eroe.nome} ha trucidato ${villain.nome}!`, 'log-system');
+    
+    // Configura e attiva la visualizzazione del Banner di Vittoria Pop-up
+    victoryMessage.innerHTML = `L'eroico <b>${eroe.nome}</b> ha annientato <b>${villain.nome}</b> usando l'arma <i>${eroe.arma.nome}</i> in ${turno} turni!`;
+    victoryScreen.classList.remove('hidden');
+
     btnAttack.disabled = true;
     btnRestart.disabled = false; 
     return;
@@ -178,6 +187,11 @@ btnAttack.addEventListener('click', () => {
 
   aggiornaGrafica();
   turno++;
+});
+
+// Listener per chiudere l'overlay di vittoria e tornare alla schermata di gioco principale
+document.getElementById('btn-victory-close').addEventListener('click', () => {
+  victoryScreen.classList.add('hidden');
 });
 
 btnRestart.addEventListener('click', inizializzaGioco);

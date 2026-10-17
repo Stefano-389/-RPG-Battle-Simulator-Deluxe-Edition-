@@ -6,14 +6,14 @@
   <title>RPG Battle Simulator - Deluxe Edition</title>
   <!-- Evita l'errore 404 della favicon nei log del browser -->
   <link rel="icon" href="data:,"> 
-  <!-- Collegamento al file CSS che definiremo nel prossimo passaggio -->
+  <!-- Collegamento al file CSS esterno -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <h1>⚔️ RPG Battle Simulator: Deluxe Edition ⚔️</h1>
 
-  <!-- Campo di battaglia che contiene le due schede dei combattenti -->
+  <!-- Campo di battaglia che contiene le schede dei combattenti -->
   <div class="battlefield">
     
     <!-- Scheda Eroe -->
@@ -50,7 +50,17 @@
   <h3>Registro di Battaglia</h3>
   <div id="log" class="log-container"></div>
 
-  <!-- Collegamento al file JavaScript che conterrà la logica del gioco -->
+  <!-- BANNER DI VITTORIA POP-UP (Nascosto di base all'avvio tramite la classe .hidden) -->
+  <div id="victory-screen" class="victory-overlay hidden">
+    <div class="victory-banner">
+      <div class="victory-stars">⭐ ⭐ ⭐</div>
+      <h2 class="victory-title">VITTORIA!</h2>
+      <p id="victory-message" class="victory-text">Il tuo eroe ha trionfato!</p>
+      <button id="btn-victory-close" class="btn-action">CONTINUA</button>
+    </div>
+  </div>
+
+  <!-- Collegamento al file JavaScript che gestisce l'intera logica -->
   <script src="main.js"></script>
 </body>
 </html>
